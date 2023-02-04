@@ -1,10 +1,12 @@
 import { ErrorResponse } from "../middleware/error-handler";
-import { FormattedError } from "./interface";
+import { CustomError } from "./custom-error";
 
-export class DatabaseConnectionError extends Error implements FormattedError {
+export class DatabaseConnectionError extends CustomError {
   reason = "Error connecting to database";
+  statusCode = 400;
+
   constructor() {
-    super();
+    super("database connection error");
     Object.setPrototypeOf(this, DatabaseConnectionError.prototype);
   }
   serializeError(): ErrorResponse {

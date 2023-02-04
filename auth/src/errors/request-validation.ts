@@ -1,11 +1,12 @@
 import { ValidationError } from "express-validator";
 import { ErrorResponse } from "../middleware/error-handler";
-import { FormattedError } from "./interface";
+import { CustomError } from "./custom-error";
 
-export class RequestValidationError extends Error implements FormattedError {
+export class RequestValidationError extends CustomError {
   readonly errors: ValidationError[] = [];
+  statusCode = 400;
   constructor(errors: ValidationError[]) {
-    super();
+    super("invalid request parameters");
     Object.setPrototypeOf(this, RequestValidationError.prototype);
     this.errors = errors;
   }
