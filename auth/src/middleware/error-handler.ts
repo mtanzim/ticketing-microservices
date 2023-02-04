@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { DatabaseConnectionError } from "../errors/database-connection-error";
 import { RequestValidationError } from "../errors/request-validation";
 
-type ErrorResponse = {
+export type ErrorResponse = {
   errors: Array<{ message: string; field?: string }>;
 };
 export const errorHandler = (
@@ -11,27 +11,13 @@ export const errorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  const ERR_STATUS_CODE = 400;
-
   if (err instanceof RequestValidationError) {
     console.log("handling request error");
-    const formattedErrors = err.errors.map((e) => ({
-      message: e.msg,
-      field: e.param,
-    }));
-    const errRes: ErrorResponse = { errors: formattedErrors };
-    return res.status(ERR_STATUS_CODE).send(errRes);
+
+    return res.status(400).send(err.serializeError());
   }
   if (err instanceof DatabaseConnectionError) {
-    console.log("handling db connection error error");
-    const errRes: ErrorResponse = {
-      errors: [
-        {
-          message: err.reasons,
-        },
-      ],
-    };
-    return res.status(ERR_STATUS_CODE).send(errRes);
+    return res.status(500).send(err.serializeError());
   }
 
   const defaultError: ErrorResponse = {
@@ -41,5 +27,5 @@ export const errorHandler = (
       },
     ],
   };
-  return res.status(ERR_STATUS_CODE).send(defaultError);
+  return res.status(400).send(defaultError);
 };
