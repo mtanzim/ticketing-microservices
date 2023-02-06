@@ -1,14 +1,14 @@
 import { ErrorResponse } from "../middleware/error-handler";
 import { CustomError } from "./custom-error";
 
-export class UserError extends CustomError {
+export class BadRequestError extends CustomError {
   statusCode = 400;
-  reason = "Something went wrong with the user";
+  reason = "Invalid request sent";
 
   constructor(reason: string) {
     super(reason);
     this.reason = reason;
-    Object.setPrototypeOf(this, UserError.prototype);
+    Object.setPrototypeOf(this, BadRequestError.prototype);
   }
   serializeError(): ErrorResponse {
     return {
