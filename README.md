@@ -6,8 +6,18 @@ Creating a microservices based application for ticketing using the MERN tech sta
 
 ## Concepts to reference in the future
 
+### Kubernetes
+
+- Kubernetes config (ClusterIP services, ingress controllers, NodePort for debug, load balancer service) and `skaffold` for local dev
+
+### Node backend
+
 - Mongoose ORM usage (statics, pre save hooks etc)
 - Password hashing in NodeJS
 - Making TS and Mongoose play nice
 
+### Authentication
 
+- JWT vs Cookies
+
+![Why JWT](./assets/jwt.jpg "jwt")
