@@ -8,9 +8,17 @@ import { signInRouter } from "./routes/signin";
 import { signOutRouter } from "./routes/signout";
 import { signUpRouter } from "./routes/signup";
 import mongoose from "mongoose";
+import cookieSession from "cookie-session";
 
 const app = express();
+app.set("trust proxy", true);
 app.use(json());
+app.use(
+  cookieSession({
+    signed: false,
+    secure: true,
+  })
+);
 app.use(currentUserRouter);
 app.use(signInRouter);
 app.use(signOutRouter);
@@ -26,7 +34,7 @@ const PORT = 3000;
 const start = async () => {
   try {
     await mongoose.connect("mongodb://auth-mongo-srv:27017/auth");
-    console.log("Connected to MongoDB")
+    console.log("Connected to MongoDB");
   } catch (err) {
     console.error(err);
   }
