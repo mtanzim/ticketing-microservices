@@ -35,7 +35,10 @@ router.post(
     const userJwt = jwt.sign({ id: user.id, email: user.email }, secret!);
     req.session = { jwt: userJwt };
 
-    return res.status(201).json(user);
+    return res.status(201).json({
+      email: user.email,
+      id: user._id,
+    });
   }
 );
 
