@@ -32,6 +32,12 @@ app.use(errorHandler);
 const PORT = 3000;
 
 const start = async () => {
+  const secret = process.env?.["JWT_KEY"];
+
+  if (!secret) {
+    throw new Error("jwt secret not configured");
+  }
+
   try {
     await mongoose.connect("mongodb://auth-mongo-srv:27017/auth");
     console.log("Connected to MongoDB");

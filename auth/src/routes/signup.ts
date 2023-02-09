@@ -30,9 +30,9 @@ router.post(
     const user = User.build({ email, password: hashedPassword });
     await user.save();
 
-    // generate jwt, store it on the session object
-    // TODO: replace secret
-    const userJwt = jwt.sign({ id: user.id, email: user.email }, "SECRET");
+    const secret = process.env?.["JWT_KEY"];
+    // env var checked in index.ts
+    const userJwt = jwt.sign({ id: user.id, email: user.email }, secret!);
     req.session = { jwt: userJwt };
 
     return res.status(201).json(user);
