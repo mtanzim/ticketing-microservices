@@ -17,6 +17,7 @@ Creating a microservices based application for ticketing using the MERN tech sta
 - Password hashing in NodeJS
 - Making TS and Mongoose play nice
 - `toJSON` method in `mongoose`
+- Setting cookies in `express`
 
 ### Authentication
 
