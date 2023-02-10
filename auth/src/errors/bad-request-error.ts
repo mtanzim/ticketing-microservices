@@ -3,9 +3,9 @@ import { CustomError } from "./custom-error";
 
 export class BadRequestError extends CustomError {
   statusCode = 400;
-  reason = "Invalid request sent";
+  reason: string;
 
-  constructor(reason: string) {
+  constructor(reason = "Something went wrong") {
     super(reason);
     this.reason = reason;
     Object.setPrototypeOf(this, BadRequestError.prototype);
