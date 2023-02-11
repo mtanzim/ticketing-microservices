@@ -18,6 +18,17 @@ Creating a microservices based application for ticketing using the MERN tech sta
 - Making TS and Mongoose play nice
 - `toJSON` method in `mongoose`
 - Setting cookies in `express`
+- Extending `express` types:
+
+```ts
+declare global {
+  namespace Express {
+    interface Request {
+      currentUser?: UserPayload;
+    }
+  }
+}
+```
 
 ### Authentication
 
