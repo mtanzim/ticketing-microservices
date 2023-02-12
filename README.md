@@ -30,6 +30,8 @@ declare global {
 }
 ```
 
+- Jest setup config in `package.json`, ie: setting up `env` vars
+
 ### Authentication
 
 - JWT vs Cookies
