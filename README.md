@@ -31,6 +31,7 @@ declare global {
 ```
 
 - Jest setup config in `package.json`, ie: setting up `env` vars
+- User `supertest` and `mongo-memory-server` for integration tests
 
 ### Authentication
 
