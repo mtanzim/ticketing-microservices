@@ -38,3 +38,7 @@ declare global {
 - JWT vs Cookies
 
 ![Why JWT](./assets/jwt.jpg "jwt")
+
+### NextJS
+
+- [Importing global css](./client/pages/_app.js)
