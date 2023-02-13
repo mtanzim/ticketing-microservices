@@ -48,11 +48,16 @@ export default function Signup() {
             <button className="mt-4 mb-4 btn btn-primary">Sign up</button>
           </form>
           <div>
-            {errors?.map((e) => (
-              <div class="alert alert-warning" role="alert">
-                {e?.message}
+            {errors?.length > 0 && (
+              <div class="alert alert-danger" role="alert">
+                <h2>Oops...</h2>
+                <ul>
+                  {errors?.map((e) => (
+                    <li>{e?.message}</li>
+                  ))}
+                </ul>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </div>
