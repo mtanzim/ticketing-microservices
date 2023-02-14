@@ -1,25 +1,23 @@
 import { useState } from "react";
 import axios from "axios";
+import useRequest from "../../hooks/useRequest";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setError] = useState([]);
+
+  const { doRequest, errJSX } = useRequest({
+    url: "/api/users/signup",
+    method: "post",
+    body: {
+      email,
+      password,
+    },
+  });
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    setError([]);
-    try {
-      const response = await axios.post("/api/users/signup", {
-        email,
-        password,
-      });
-      console.log(response.data);
-    } catch (err) {
-      setError(
-        err?.response?.data?.errors || [{ message: "Something went wrong" }]
-      );
-    }
+    doRequest();
   };
 
   return (
@@ -47,18 +45,7 @@ export default function Signup() {
             </div>
             <button className="mt-4 mb-4 btn btn-primary">Sign up</button>
           </form>
-          <div>
-            {errors?.length > 0 && (
-              <div class="alert alert-danger" role="alert">
-                <h2>Oops...</h2>
-                <ul>
-                  {errors?.map((e) => (
-                    <li>{e?.message}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
+          <div>{errJSX}</div>
         </div>
       </div>
     </div>
