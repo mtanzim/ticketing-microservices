@@ -10,6 +10,17 @@ Creating a microservices based application for ticketing using the MERN tech sta
 
 - Kubernetes config (ClusterIP services, ingress controllers, NodePort for debug, load balancer service) and `skaffold` for local dev
 - Creating secrets with `kubectl` and mapping to env variables in pods
+- `kubernetes` namespaces: how to reach back to the ingress-nginx-controller from a pod (`nextjs` server in this case)
+
+![K8s namespaces](./assets/k8-namespace.png "namespaces")
+
+- A few helpful commands:
+
+```bash
+kubectl get services
+kubectl get namespace
+kubectl get services -n ingress-nginx
+```
 
 ### Node backend
 
@@ -42,3 +53,4 @@ declare global {
 ### NextJS
 
 - [Importing global css](./client/pages/_app.js)
+- `getInitialProps` gets executed on the client side iff next app redirects from a page! Otherwise it is executed on the server
