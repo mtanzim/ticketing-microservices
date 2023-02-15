@@ -53,4 +53,4 @@ declare global {
 ### NextJS
 
 - [Importing global css](./client/pages/_app.js)
-- `getInitialProps` gets executed on the client side iff next app redirects from a page! Otherwise it is executed on the server
+- `getInitialProps` gets executed on the client side iff next app redirects from a page! Otherwise it is executed on the server, [see example](https://github.com/mtanzim/ticketing-microservices/blob/2920efa4fdcee790d6145bab36f76281fe37a58a/client/pages/index.js#L12)
