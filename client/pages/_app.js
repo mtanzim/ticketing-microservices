@@ -1,8 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css";
 import buildClient from "../api/buildClient";
 
-export default function AppComponent({ Component, pageProps }) {
-  console.log(pageProps);
+export default function AppComponent({ Component, pageProps, currentUser }) {
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -23,20 +22,26 @@ export default function AppComponent({ Component, pageProps }) {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-              <a
-                className="nav-link active"
-                aria-current="page"
-                href="/auth/signup"
-              >
-                Sign up
-              </a>
-              <a
-                className="nav-link active"
-                aria-current="page"
-                href="/auth/signin"
-              >
-                Sign in
-              </a>
+              {currentUser?.email ? (
+                <a className="nav-link disabled">{currentUser?.email || ""}</a>
+              ) : (
+                <>
+                  <a
+                    className="nav-link active"
+                    aria-current="page"
+                    href="/auth/signup"
+                  >
+                    Sign up
+                  </a>
+                  <a
+                    className="nav-link active"
+                    aria-current="page"
+                    href="/auth/signin"
+                  >
+                    Sign in
+                  </a>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -50,8 +55,17 @@ export default function AppComponent({ Component, pageProps }) {
 
 // Note how this is different from other pages
 // the ctx attribute is nested within the context argument
-AppComponent.getInitialProps = async (context) => {
-  const client = buildClient(context.ctx);
+AppComponent.getInitialProps = async (appContext) => {
+  const client = buildClient(appContext.ctx);
   const { data } = await client.get("/api/users/currentuser");
-  return data;
+
+  const pageProps = await appContext?.Component?.getInitialProps?.(
+    appContext.ctx
+  );
+  console.log(pageProps)
+
+  return {
+    ...data,
+    pageProps,
+  };
 };
