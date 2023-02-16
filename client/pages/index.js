@@ -13,11 +13,7 @@ const LandingPage = ({ currentUser }) => {
       {!!currentUser?.email ? (
         <p>{currentUser.email}</p>
       ) : (
-        <div>
-          <a href="/auth/signup/">please sign up</a>
-          <p>Or</p>
-          <a href="/auth/signin/">please sign in</a>
-        </div>
+        <p>Please sign up or sign in</p>
       )}
     </div>
   );
