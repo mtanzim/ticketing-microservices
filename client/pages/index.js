@@ -1,4 +1,5 @@
 import axios from "axios";
+import buildClient from "../api/buildClient";
 
 const LandingPage = ({ currentUser }) => {
   console.log(currentUser);
@@ -6,31 +7,16 @@ const LandingPage = ({ currentUser }) => {
     console.log(err.message);
   });
 
-  return <h1>Landing Page</h1>;
+  return (
+    <div>
+      <h1>Landing Page</h1>
+      <p>{currentUser?.email || "Please sign in"}</p>
+    </div>
+  );
 };
 
-LandingPage.getInitialProps = async () => {
-  if (typeof window === "undefined") {
-    // we are on the server!
-    // requests should be made to ingress-controller in a separate namespace
-    console.log("we in next server");
-    const url =
-      "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/api/users/currentuser";
-    const { data } = await axios.get(url, {
-      headers: {
-        Host: "ticketing.dev",
-      },
-    });
-    console.log(data);
-    return data;
-  } else {
-    // we are on the browser
-    // requests can be made to the base url
-    console.log("we in chrome");
-    const url = "/api/users/currentuser/";
-    const { data } = await axios.get(url);
-    console.log(data);
-    return data;
-  }
+LandingPage.getInitialProps = async (context) => {
+  const { data } = await buildClient(context).get("/api/users/currentuser");
+  return data;
 };
 export default LandingPage;
