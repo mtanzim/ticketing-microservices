@@ -45,11 +45,6 @@ export default function Signup() {
               ></input>
             </div>
             <button className="mt-4 mb-4 btn btn-primary">Sign up</button>
-            <nav class="nav">
-              <a class="nav-link" href="/auth/signin">
-                Sign in instead
-              </a>
-            </nav>
           </form>
           <div>{errJSX}</div>
         </div>
