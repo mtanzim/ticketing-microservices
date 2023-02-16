@@ -7,7 +7,7 @@ export default function Signup() {
   const [password, setPassword] = useState("");
 
   const { doRequest, errJSX } = useRequest({
-    url: "/api/users/signup",
+    url: "/api/users/signin",
     method: "post",
     body: {
       email,
@@ -26,7 +26,7 @@ export default function Signup() {
       <div className="row">
         <div className="col-md-6">
           <form onSubmit={onSubmit}>
-            <h1>Sign up</h1>
+            <h1>Sign in</h1>
             <div className="form-group mt-2">
               <label>Email address</label>
               <input
@@ -44,10 +44,10 @@ export default function Signup() {
                 className="form-control"
               ></input>
             </div>
-            <button className="mt-4 mb-4 btn btn-primary">Sign up</button>
+            <button className="mt-4 mb-4 btn btn-primary">Sign in</button>
             <nav class="nav">
-              <a class="nav-link" href="/auth/signin">
-                Sign in instead
+              <a class="nav-link" href="/auth/signup">
+                Sign up instead
               </a>
             </nav>
           </form>

@@ -10,7 +10,15 @@ const LandingPage = ({ currentUser }) => {
   return (
     <div>
       <h1>Landing Page</h1>
-      <p>{currentUser?.email || "Please sign in"}</p>
+      {!!currentUser?.email ? (
+        <p>{currentUser.email}</p>
+      ) : (
+        <div>
+          <a href="/auth/signup/">please sign up</a>
+          <p>Or</p>
+          <a href="/auth/signin/">please sign in</a>
+        </div>
+      )}
     </div>
   );
 };
