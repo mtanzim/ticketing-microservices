@@ -58,5 +58,5 @@ declare global {
 
 ### NPM Modules
 
-- Creating NPM orgs
+- Creating NPM orgs, publishing and patching modules
 - Setting up JS transpilation for TS modules
