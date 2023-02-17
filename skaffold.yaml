@@ -16,6 +16,14 @@ build:
         manual:
           - dest: .
             src: "src/**/*.ts"
+    - image: mtanzim/tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: "src/**/*.ts"
     - image: mtanzim/client
       context: client
       docker:
