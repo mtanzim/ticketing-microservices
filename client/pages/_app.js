@@ -1,51 +1,11 @@
 import "bootstrap/dist/css/bootstrap.css";
 import buildClient from "../api/buildClient";
+import Header from "../components/Header";
 
 export default function AppComponent({ Component, pageProps, currentUser }) {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="/">
-            GitTix
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav">
-              {currentUser?.email ? (
-                <a className="nav-link disabled">{currentUser?.email || ""}</a>
-              ) : (
-                <>
-                  <a
-                    className="nav-link active"
-                    aria-current="page"
-                    href="/auth/signup"
-                  >
-                    Sign up
-                  </a>
-                  <a
-                    className="nav-link active"
-                    aria-current="page"
-                    href="/auth/signin"
-                  >
-                    Sign in
-                  </a>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Header currentUser={currentUser} />
       <div className="container">
         <Component {...pageProps} />
       </div>
@@ -62,7 +22,7 @@ AppComponent.getInitialProps = async (appContext) => {
   const pageProps = await appContext?.Component?.getInitialProps?.(
     appContext.ctx
   );
-  console.log(pageProps)
+  console.log(pageProps);
 
   return {
     ...data,
