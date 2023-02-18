@@ -11,7 +11,12 @@ const start = async () => {
   }
 
   try {
-    await mongoose.connect("mongodb://tickets-mongo-srv:27017/auth");
+    const mongoURI = process.env?.["MONGO_URI"];
+    if (!mongoURI) {
+      throw new Error("mongo uri not configured");
+    }
+    console.log(mongoURI);
+    await mongoose.connect(mongoURI);
     console.log("Connected to MongoDB");
   } catch (err) {
     console.error(err);
