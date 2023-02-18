@@ -1,28 +1,24 @@
-import "express-async-errors";
 import mongoose from "mongoose";
+
 import { app } from "./app";
 
-const PORT = 3000;
 const start = async () => {
-  const secret = process.env?.["JWT_KEY"];
-
-  if (!secret) {
-    throw new Error("jwt secret not configured");
+  if (!process.env.JWT_KEY) {
+    throw new Error("JWT_KEY must be defined");
+  }
+  if (!process.env.MONGO_URI) {
+    throw new Error("MONGO_URI must be defined");
   }
 
   try {
-    const mongoURI = process.env?.["MONGO_URI"];
-    if (!mongoURI) {
-      throw new Error("mongo uri not configured");
-    }
-    console.log(mongoURI);
-    await mongoose.connect(mongoURI);
-    console.log("Connected to MongoDB");
+    await mongoose.connect(process.env.MONGO_URI, {});
+    console.log("Connected to MongoDb");
   } catch (err) {
     console.error(err);
   }
-  app.listen(PORT, () => {
-    console.log(`started app on port ${PORT}`);
+
+  app.listen(3000, () => {
+    console.log("Listening on port 3000!!!!!!!!");
   });
 };
 
