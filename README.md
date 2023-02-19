@@ -66,4 +66,6 @@ declare global {
 
 ![NATS Streaming Topics](./assets/nats-topics.jpg "topics")
 
-![Why JWT](./assets/nats-storage.jpg "storage")
+![NATS Storage](./assets/nats-storage.jpg "storage")
+
+- To port forward: `kubectl port-forward <pod-name> 4222:4222`
