@@ -63,9 +63,14 @@ declare global {
 ### NATS Streaming Server
 
 - [Documentation](https://github.com/nats-io/nats-streaming-server#nats-streaming-server)
+- To port forward the nats pod during debug: `kubectl port-forward <pod-name> 4222:4222`
+
+#### Topics and Storage
 
 ![NATS Streaming Topics](./assets/nats-topics.jpg "topics")
 
 ![NATS Storage](./assets/nats-storage.jpg "storage")
 
-- To port forward: `kubectl port-forward <pod-name> 4222:4222`
+#### Queue Groups
+
+![NATS Queue Groups](./assets/nats-queue-group.jpg "queue groups")
