@@ -76,3 +76,8 @@ declare global {
 - [Example code](https://github.com/mtanzim/ticketing-microservices/blob/f92a066ad6cc621fbf4741bf0b02e40a0f99f4f0/nats-example/src/listener.ts#L15)
 
 ![NATS Queue Groups](./assets/nats-queue-group.jpg "queue groups")
+
+
+#### General event based architecture 
+
+![Event based architecture](./assets/event-arch.jpg "arch")
