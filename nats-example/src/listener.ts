@@ -4,6 +4,7 @@ import nats, { Message } from "node-nats-streaming";
 console.clear();
 const TOPIC = "ticket:created";
 const QUEUE_GROUP = "orders-service-queue-group";
+const DURABLE_GROUP = "orders-service-durable-group";
 
 const stan = nats.connect("ticketing", randomBytes(4).toString("hex"), {
   url: "http://localhost:4222",
@@ -17,7 +18,11 @@ stan.on("connect", () => {
     process.exit();
   });
 
-  const options = stan.subscriptionOptions().setManualAckMode(true);
+  const options = stan
+    .subscriptionOptions()
+    .setManualAckMode(true)
+    .setDeliverAllAvailable()
+    .setDurableName(DURABLE_GROUP);
 
   const subscription = stan.subscribe(TOPIC, QUEUE_GROUP, options);
   subscription.on("message", (msg: Message) => {
