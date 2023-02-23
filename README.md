@@ -64,6 +64,7 @@ declare global {
 ### NATS Streaming Server
 
 - [Documentation](https://github.com/nats-io/nats-streaming-server#nats-streaming-server)
+- [Simple example](./nats-example/)
 
 #### Topics and Storage
 
