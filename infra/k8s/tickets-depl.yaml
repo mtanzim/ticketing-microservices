@@ -18,8 +18,6 @@ spec:
           env:
             - name: CLUSTER_ID
               value: ticketing
-            - name: CLIENT_ID
-              value: ticketing-service
             - name: NATS_URL
               value: http://nats-srv:4222
             - name: MONGO_URI
