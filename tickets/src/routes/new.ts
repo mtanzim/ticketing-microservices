@@ -1,6 +1,6 @@
+import { requireAuth, validateRequest } from "@tm-tickets-1989/common";
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
-import { requireAuth, validateRequest } from "@tm-tickets-1989/common";
 import { Ticket } from "../models/ticket";
 
 const router = express.Router();

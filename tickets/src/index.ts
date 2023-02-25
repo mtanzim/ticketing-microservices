@@ -1,8 +1,24 @@
 import mongoose from "mongoose";
+import nats from "node-nats-streaming";
 
 import { app } from "./app";
 
 const start = async () => {
+  const clusterId = process.env.CLUSTER_ID;
+  const clientId = process.env.CLIENT_ID;
+  const natsURL = process.env.NATS_URL;
+  if (!clusterId || !clientId || !natsURL) {
+    throw new Error("CLIENT_ID and CLUSTER_ID must be defined for NATS");
+  }
+
+  const stan = nats.connect(clusterId, clientId, {
+    url: natsURL,
+  });
+
+  stan.on("connect", async () => {
+    console.log("nats connected");
+  });
+
   if (!process.env.JWT_KEY) {
     throw new Error("JWT_KEY must be defined");
   }
