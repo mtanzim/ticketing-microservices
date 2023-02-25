@@ -1,0 +1,162 @@
+{
+	"info": {
+		"_postman_id": "d051c246-3002-48d3-ba5e-c5bde8d948c3",
+		"name": "udemy-ticketing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4193980"
+	},
+	"item": [
+		{
+			"name": "signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"ssg@llo.com\",\n    \"password\": \"4444\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ticketing.dev/api/users/signup",
+					"protocol": "https",
+					"host": [
+						"ticketing",
+						"dev"
+					],
+					"path": [
+						"api",
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ticketing.dev/api/users/signout",
+					"protocol": "https",
+					"host": [
+						"ticketing",
+						"dev"
+					],
+					"path": [
+						"api",
+						"users",
+						"signout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"ssg@llo.com\",\n    \"password\": \"4444\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ticketing.dev/api/users/signin",
+					"protocol": "https",
+					"host": [
+						"ticketing",
+						"dev"
+					],
+					"path": [
+						"api",
+						"users",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "currentUser",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"ssg@llo.com\",\n    \"password\": \"4444\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ticketing.dev/api/users/currentuser",
+					"protocol": "https",
+					"host": [
+						"ticketing",
+						"dev"
+					],
+					"path": [
+						"api",
+						"users",
+						"currentuser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createTicket",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"new shit\",\n    \"price\": 12.366\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ticketing.dev/api/tickets",
+					"protocol": "https",
+					"host": [
+						"ticketing",
+						"dev"
+					],
+					"path": [
+						"api",
+						"tickets"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
