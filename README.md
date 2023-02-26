@@ -95,4 +95,4 @@ declare global {
 
 ### Jest
 
-- [Suite wide mocks](https://github.com/mtanzim/ticketing-microservices/blob/9991050fcd5fe96a76a645a70c229d13a2dffe04/tickets/src/test/setup.ts#L4)
+- [Suite wide mocks](https://github.com/mtanzim/ticketing-microservices/blob/ee2b110fddc9685afd2332dd8172e19cb9774b1b/tickets/src/test/setup.ts#L4)
