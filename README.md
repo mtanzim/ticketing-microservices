@@ -92,3 +92,7 @@ declare global {
 ![Missed publishes](./assets/publish-fail.jpg "failed publish")
 
 - Note that the project code does not implement this
+
+### Jest
+
+- [Suite wide mocks](https://github.com/mtanzim/ticketing-microservices/blob/9991050fcd5fe96a76a645a70c229d13a2dffe04/tickets/src/test/setup.ts#L4)
