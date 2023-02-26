@@ -1,12 +1,18 @@
 import mongoose from "mongoose";
-import { natsWrapper } from "./nats-wrapper";
 import { app } from "./app";
-import { randomBytes } from "crypto";
+import { natsWrapper } from "./nats-wrapper";
 const start = async () => {
-  const clusterId = process.env.CLUSTER_ID;
+  const clusterId = process.env.NATS_CLUSTER_ID;
   const natsURL = process.env.NATS_URL;
-  if (!clusterId || !natsURL) {
-    throw new Error("CLIENT_ID and CLUSTER_ID must be defined for NATS");
+  const clientId = process.env.NATS_CLIENT_ID;
+  if (!clusterId) {
+    throw new Error("NATS_CLUSTER_ID must be defined");
+  }
+  if (!natsURL) {
+    throw new Error("NATS_URL must be defined");
+  }
+  if (!clientId) {
+    throw new Error("NATS_CLIENT_ID must be defined");
   }
   if (!process.env.JWT_KEY) {
     throw new Error("JWT_KEY must be defined");
@@ -16,11 +22,9 @@ const start = async () => {
   }
 
   try {
-    await natsWrapper.connect(
-      clusterId,
-      randomBytes(4).toString("hex"),
-      natsURL
-    );
+    console.log("nats info");
+    console.log({ clusterId, clientId, natsURL });
+    await natsWrapper.connect(clusterId, clientId, natsURL);
 
     natsWrapper.client.on("close", () => {
       console.log("NATS connection closed.");

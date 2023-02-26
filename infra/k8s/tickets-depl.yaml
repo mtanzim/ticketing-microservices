@@ -16,7 +16,11 @@ spec:
         - name: tickets
           image: mtanzim/tickets
           env:
-            - name: CLUSTER_ID
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_CLUSTER_ID
               value: ticketing
             - name: NATS_URL
               value: http://nats-srv:4222
