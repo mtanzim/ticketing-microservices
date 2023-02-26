@@ -78,7 +78,17 @@ declare global {
 
 ![NATS Queue Groups](./assets/nats-queue-group.jpg "queue groups")
 
-
-#### General event based architecture 
+#### General event based architecture
 
 ![Event based architecture](./assets/event-arch.jpg "arch")
+
+#### Handling failed publishes
+
+- Use a DB tx to log events in addition to the data updates
+- If a publish succeeds, update a flag to mark the event published
+- Run a background process to periodically publish unpublished events
+- See following diagram for an example
+
+![Missed publishes](./assets/publish-fail.jpg "failed publish")
+
+- Note that the project code does not implement this
