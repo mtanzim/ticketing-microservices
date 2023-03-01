@@ -96,3 +96,12 @@ declare global {
 ### Jest
 
 - [Suite wide mocks](https://github.com/mtanzim/ticketing-microservices/blob/ee2b110fddc9685afd2332dd8172e19cb9774b1b/tickets/src/test/setup.ts#L4)
+
+### Shared code and interfaces b/w services
+
+- See the associated [library] published on `npm`(https://github.com/mtanzim/ticketing-microservices-common)
+- Regarding shared types and event definitions, we used `Typescript`, ie:
+  - [Ticket created event](https://github.com/mtanzim/ticketing-microservices/blob/07cb5822c1854b70db7b26e4d46f3479a40db155/src/events/ticket-created-event.ts#L3)
+  - [Ticket updated event](https://github.com/mtanzim/ticketing-microservices/blob/07cb5822c1854b70db7b26e4d46f3479a40db155/src/events/ticket-updated-event.ts#L3)
+  - [Subjects](https://github.com/mtanzim/ticketing-microservices/blob/07cb5822c1854b70db7b26e4d46f3479a40db155/src/events/subjects.ts#L1)
+- Alternatives to the above include Apache Avro, JSONSchem, Protobuf
