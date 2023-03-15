@@ -5,6 +5,7 @@ import { Order } from "./order";
 interface TicketAttrs {
   title: string;
   price: number;
+  id: string;
 }
 
 export interface TicketDoc extends mongoose.Document {
@@ -40,7 +41,8 @@ const ticketSchema = new mongoose.Schema(
 );
 
 ticketSchema.statics.build = (attrs: TicketAttrs) => {
-  return new Ticket(attrs);
+  const { id: _id } = attrs;
+  return new Ticket({ ...attrs, _id, id: undefined });
 };
 
 ticketSchema.methods.isReserved = async function () {
