@@ -40,6 +40,8 @@ it("version number gets incremented", async () => {
   await ticket.save();
   // fetch ticket twice
   const ticket1 = await Ticket.findOne({ title: TITLE });
+  expect(ticket1?.version).toBe(0);
+
 
   // make separate changes to the tickets
   ticket1!.set({ price: 44 });
