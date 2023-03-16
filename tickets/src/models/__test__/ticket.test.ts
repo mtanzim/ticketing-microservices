@@ -27,3 +27,24 @@ it("implements OCC control", async () => {
   }
   throw new Error("test failed, should not come here");
 });
+
+it("version number gets incremented", async () => {
+  const TITLE = "test123123123213";
+  // create an instance of the ticket
+  const ticket = Ticket.build({
+    price: 33,
+    title: TITLE,
+    userId: "444",
+  });
+  // save ticket to DB
+  await ticket.save();
+  // fetch ticket twice
+  const ticket1 = await Ticket.findOne({ title: TITLE });
+
+  // make separate changes to the tickets
+  ticket1!.set({ price: 44 });
+  await ticket1!.save();
+
+  const ticket2 = await Ticket.findOne({ title: TITLE });
+  expect(ticket2?.version).toBe(1);
+});
