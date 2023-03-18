@@ -9,6 +9,11 @@ interface TicketAttrs {
   id: string;
 }
 
+interface CustomFindArgs {
+  id: string;
+  version: number;
+}
+
 export interface TicketDoc extends mongoose.Document {
   title: string;
   price: number;
@@ -18,6 +23,7 @@ export interface TicketDoc extends mongoose.Document {
 
 interface TicketModel extends mongoose.Model<TicketDoc> {
   build(attrs: TicketAttrs): TicketDoc;
+  findByEvent(args: CustomFindArgs): Promise<TicketDoc | null>;
 }
 
 const ticketSchema = new mongoose.Schema(
@@ -48,6 +54,13 @@ ticketSchema.plugin(updateIfCurrentPlugin);
 ticketSchema.statics.build = (attrs: TicketAttrs) => {
   const { id: _id } = attrs;
   return new Ticket({ ...attrs, _id, id: undefined });
+};
+
+ticketSchema.statics.findByEvent = async ({ id, version }: CustomFindArgs) => {
+  return Ticket.findOne({
+    _id: id,
+    version: version - 1,
+  });
 };
 
 ticketSchema.methods.isReserved = async function () {

@@ -4,8 +4,8 @@ import {
   TicketCreatedEvent,
 } from "@tm-tickets-1989/common";
 import { Message } from "node-nats-streaming";
-import { Ticket } from "../models/ticket";
-import { queueGroupName } from "./queue-group-name";
+import { Ticket } from "../../models/ticket";
+import { queueGroupName } from "../queue-group-name";
 
 export class TicketCreatedListener extends Listener<TicketCreatedEvent> {
   subject: Subjects.TicketCreated = Subjects.TicketCreated;
