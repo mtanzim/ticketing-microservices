@@ -27,5 +27,11 @@ it("listener persists ticket", async () => {
   const ticket = await Ticket.findById(data.id);
   expect(ticket).toBeDefined();
   expect(ticket?.price).toBe(data.price);
+});
+
+it("listener acks message on success", async () => {
+  const { listener, data, msg } = await setup();
+  await listener.onMessage(data, msg);
+  await Ticket.findById(data.id);
   expect(msg.ack).toHaveBeenCalled();
 });
