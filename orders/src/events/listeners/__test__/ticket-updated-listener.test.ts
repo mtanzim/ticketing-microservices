@@ -34,7 +34,7 @@ it("listener persists ticket if version is correct", async () => {
   expect(msg.ack).toBeCalled();
 });
 
-it("listener does NOT persists ticket if version is correct", async () => {
+it("listener does NOT persists ticket if version is NOT correct", async () => {
   const { listener, data, msg } = await setup();
   const ticket = await Ticket.build(data);
   await ticket.save();
