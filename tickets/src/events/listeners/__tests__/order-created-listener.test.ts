@@ -45,6 +45,11 @@ it("listener updates ticket order id correctly", async () => {
 it("listener acks message on success", async () => {
   const { listener, data, msg } = await setup();
   await listener.onMessage(data, msg);
-  await Ticket.findById(data.id);
   expect(msg.ack).toHaveBeenCalled();
+});
+
+it("listener publishes update to ticket", async () => {
+  const { listener, data, msg } = await setup();
+  await listener.onMessage(data, msg);
+  expect(natsWrapper.client.publish).toBeCalled();
 });
