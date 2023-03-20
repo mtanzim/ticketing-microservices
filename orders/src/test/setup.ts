@@ -1,12 +1,11 @@
+import jwt from "jsonwebtoken";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
-import jwt from "jsonwebtoken";
+jest.mock('../nats-wrapper')
 
 declare global {
   var signin: () => string[];
 }
-
-jest.mock("../nats-wrapper");
 
 let mongo: any;
 beforeAll(async () => {
@@ -20,7 +19,6 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
-  jest.clearAllMocks();
   const collections = await mongoose.connection.db.collections();
 
   for (let collection of collections) {
@@ -55,5 +53,5 @@ global.signin = () => {
   const base64 = Buffer.from(sessionJSON).toString("base64");
 
   // return a string thats the cookie with the encoded data
-  return [`express:sess=${base64}`];
+  return [`session=${base64}`];
 };
