@@ -13,7 +13,7 @@ const setup = async () => {
     title: "whatever",
     price: 44.33,
   });
-  ticket.orderId = "something";
+  ticket.set({ orderId: "something" });
   await ticket.save();
 
   const data: OrderCancelledEvent["data"] = {
