@@ -1,28 +1,25 @@
-import { OrderCreatedEvent, OrderStatus } from "@tm-tickets-1989/common";
+import { OrderCancelledEvent } from "@tm-tickets-1989/common";
 import mongoose from "mongoose";
 import { Message } from "node-nats-streaming";
 import { Ticket } from "../../../models/ticket";
 import { natsWrapper } from "../../../nats-wrapper";
-import { OrderCreatedListener } from "../order-created-listener";
+import { OrderCancelledListener } from "../order-cancelled-listener";
 
 const setup = async () => {
-  const listener = new OrderCreatedListener(natsWrapper.client);
+  const listener = new OrderCancelledListener(natsWrapper.client);
 
   const ticket = await Ticket.build({
     userId: new mongoose.Types.ObjectId().toHexString(),
     title: "whatever",
     price: 44.33,
   });
+  ticket.orderId = "something";
   await ticket.save();
 
-  const data: OrderCreatedEvent["data"] = {
+  const data: OrderCancelledEvent["data"] = {
     id: new mongoose.Types.ObjectId().toHexString(),
-    userId: new mongoose.Types.ObjectId().toHexString(),
-    status: OrderStatus.Created,
-    expiresAt: new Date().toString(),
     ticket: {
       id: ticket.id,
-      price: ticket.price,
     },
     version: 0,
   };
@@ -39,7 +36,7 @@ it("listener updates ticket order id correctly", async () => {
   await listener.onMessage(data, msg);
   const ticketReadback = await Ticket.findById(data.ticket.id);
   expect(ticketReadback).toBeDefined();
-  expect(ticketReadback?.orderId).toBe(data.id);
+  expect(ticketReadback?.orderId).toBe(undefined);
 });
 
 it("listener acks message on success", async () => {
