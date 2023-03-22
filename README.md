@@ -99,7 +99,7 @@ declare global {
 
 ### Shared code and interfaces b/w services
 
-- See the associated [library] published on `npm`(https://github.com/mtanzim/ticketing-microservices-common)
+- See the associated [library](https://github.com/mtanzim/ticketing-microservices-common) published on `npm`
 - Regarding shared types and event definitions, we used `Typescript`, ie:
   - [Ticket created event](https://github.com/mtanzim/ticketing-microservices/blob/07cb5822c1854b70db7b26e4d46f3479a40db155/src/events/ticket-created-event.ts#L3)
   - [Ticket updated event](https://github.com/mtanzim/ticketing-microservices/blob/07cb5822c1854b70db7b26e4d46f3479a40db155/src/events/ticket-updated-event.ts#L3)
