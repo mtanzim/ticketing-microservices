@@ -19,7 +19,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@tm-tickets-1989/common": "1.0.14",
+    "@tm-tickets-1989/common": "1.0.15",
     "@types/bull": "^4.10.0",
     "bull": "^4.10.4",
     "node-nats-streaming": "^0.3.2",
