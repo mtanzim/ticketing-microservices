@@ -19,8 +19,13 @@ interface OrderDoc extends mongoose.Document {
   status: OrderStatus;
 }
 
+interface CustomFindArgs {
+  id: string;
+  version: number;
+}
 interface OrderModel extends mongoose.Model<OrderDoc> {
   build(attrs: OrderAttrs): OrderDoc;
+  findByEvent(args: CustomFindArgs): Promise<OrderDoc | null>;
 }
 
 const orderSchema = new mongoose.Schema(
@@ -56,6 +61,13 @@ orderSchema.plugin(updateIfCurrentPlugin);
 orderSchema.statics.build = (attrs: OrderAttrs) => {
   const { id: _id } = attrs;
   return new Order({ ...attrs, _id, id: undefined });
+};
+
+orderSchema.statics.findByEvent = async ({ id, version }: CustomFindArgs) => {
+  return Order.findOne({
+    _id: id,
+    version: version - 1,
+  });
 };
 
 const Order = mongoose.model<OrderDoc, OrderModel>("Order", orderSchema);

@@ -17,7 +17,7 @@ const setup = async () => {
   await order.save();
   const data: OrderCancelledEvent["data"] = {
     id: order.id,
-    version: 0,
+    version: 1,
     ticket: {
       id: "blah",
     },
@@ -36,6 +36,17 @@ it("listener cancels order on message", async () => {
   expect(order).toBeDefined();
   expect(order?.status).toBe(OrderStatus.Cancelled);
 });
+it("listener ignores incorrect versions", async () => {
+  const { listener, data, msg } = await setup();
+  try {
+    await listener.onMessage({ ...data, version: 10101 }, msg);
+  } catch (err) {
+    expect(err).toBeDefined();
+    return;
+  }
+  throw new Error("test failed");
+});
+
 it("listener acks message", async () => {
   const { listener, data, msg } = await setup();
   await listener.onMessage(data, msg);
