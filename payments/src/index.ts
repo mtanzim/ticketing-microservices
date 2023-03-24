@@ -43,7 +43,7 @@ const start = async () => {
   }
 
   app.listen(3000, () => {
-    console.log("tickets listening on port 3000");
+    console.log("payments listening on port 3000");
   });
 };
 
