@@ -105,3 +105,9 @@ declare global {
   - [Ticket updated event](https://github.com/mtanzim/ticketing-microservices/blob/07cb5822c1854b70db7b26e4d46f3479a40db155/src/events/ticket-updated-event.ts#L3)
   - [Subjects](https://github.com/mtanzim/ticketing-microservices/blob/07cb5822c1854b70db7b26e4d46f3479a40db155/src/events/subjects.ts#L1)
 - Alternatives to the above include Apache Avro, JSONSchem, Protobuf
+
+### Summary of events and data models
+
+- See the `models`, and `events` folders in the code
+
+![Events and models](./assets/events-summary.png "events and models")
