@@ -216,6 +216,35 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "createPayment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"orderId\": \"641b75fcdd21c190c086a725\",\n    \"token\": \"blah\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ticketing.dev/api/payments",
+					"protocol": "https",
+					"host": [
+						"ticketing",
+						"dev"
+					],
+					"path": [
+						"api",
+						"payments"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

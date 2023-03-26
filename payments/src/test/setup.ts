@@ -1,10 +1,10 @@
 import jwt from "jsonwebtoken";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
-jest.mock('../nats-wrapper')
+jest.mock("../nats-wrapper");
 
 declare global {
-  var signin: () => string[];
+  var signin: () => { cookieArr: string[]; userId: string };
 }
 
 let mongo: any;
@@ -35,8 +35,9 @@ afterAll(async () => {
 
 global.signin = () => {
   // Build a JWT payload.  { id, email }
+  const userId = new mongoose.Types.ObjectId().toHexString();
   const payload = {
-    id: new mongoose.Types.ObjectId().toHexString(),
+    id: userId,
     email: "test@test.com",
   };
 
@@ -53,5 +54,5 @@ global.signin = () => {
   const base64 = Buffer.from(sessionJSON).toString("base64");
 
   // return a string thats the cookie with the encoded data
-  return [`session=${base64}`];
+  return { cookieArr: [`session=${base64}`], userId };
 };

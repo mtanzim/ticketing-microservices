@@ -1,14 +1,14 @@
 import {
-  // BadRequestError,
-  // NotFoundError,
+  BadRequestError,
+  NotFoundError,
   requireAuth,
-  // UnauthorizedError,
+  UnauthorizedError,
   validateRequest,
 } from "@tm-tickets-1989/common";
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import mongoose from "mongoose";
-// import { Order } from "../models/order";
+import { Order } from "../models/order";
 
 const router = express.Router();
 
@@ -29,22 +29,17 @@ router.post(
     const curUserId = req.currentUser?.id;
     console.log({ orderId, token, curUserId });
 
-    return res.send({ success: true });
-
-    /*
-
     // Find the ticket the user is trying to order in the database
     const order = await Order.findById(orderId);
     if (!order) {
       throw new NotFoundError();
     }
-    if (order.userId !== req.currentUser?.id) {
+    if (order.userId !== req.currentUser!.id) {
       throw new UnauthorizedError();
     }
 
-    // Make sure that this ticket is not already reserved
-    const isPending = await order.isPending();
-    if (!isPending) {
+    // Make sure that this pending payment
+    if (!order.isPending()) {
       throw new BadRequestError("order cannot be paid for");
     }
 
@@ -53,7 +48,6 @@ router.post(
     // publish charge:created message
 
     res.status(201).send(order);
-    */
   }
 );
 

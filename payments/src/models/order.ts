@@ -17,7 +17,7 @@ interface OrderDoc extends mongoose.Document {
   userId: string;
   price: number;
   status: OrderStatus;
-  isPending(): Promise<boolean>;
+  isPending(): boolean;
 }
 
 interface CustomFindArgs {
@@ -71,14 +71,8 @@ orderSchema.statics.findByEvent = async ({ id, version }: CustomFindArgs) => {
   });
 };
 
-orderSchema.methods.isPending = async function () {
-  const existingOrder = await Order.findOne({
-    _id: this._id,
-    status: {
-      $in: [OrderStatus.AwaitingPayment],
-    },
-  });
-  return !!existingOrder;
+orderSchema.methods.isPending = function () {
+  return this.status !== OrderStatus.Cancelled;
 };
 
 const Order = mongoose.model<OrderDoc, OrderModel>("Order", orderSchema);
