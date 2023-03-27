@@ -27,8 +27,6 @@ router.post(
   validateRequest,
   async (req: Request, res: Response) => {
     const { orderId, token } = req.body;
-    const curUserId = req.currentUser?.id;
-    console.log({ orderId, token, curUserId });
 
     // Find the ticket the user is trying to order in the database
     const order = await Order.findById(orderId);
