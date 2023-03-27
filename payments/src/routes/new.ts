@@ -9,6 +9,7 @@ import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import mongoose from "mongoose";
 import { Order } from "../models/order";
+import { stripe } from "../stripe";
 
 const router = express.Router();
 
@@ -44,6 +45,11 @@ router.post(
     }
 
     // create charge
+    await stripe.charges.create({
+      amount: order.price * 100,
+      currency: "cad",
+      source: token,
+    });
 
     // publish charge:created message
 
