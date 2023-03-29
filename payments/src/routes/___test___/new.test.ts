@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import request from "supertest";
 import { app } from "../../app";
 import { Order, OrderStatus } from "../../models/order";
-import { stripe } from "../../__mocks__/stripe";
+import { stripe } from "../../stripe";
 
 jest.mock("../../stripe");
 
@@ -71,11 +71,9 @@ it("succeeds if everything else is in order", async () => {
     .send({ orderId, token: "tok-nuka-cola" })
     .expect(201);
 
-  const mockOptions = JSON.parse(
-    (stripe.charges.create as jest.Mock).mock.calls[0]
-  );
-  console.log(mockOptions);
-  expect(mockOptions).toBe({
+  const mockOptions = (stripe.charges.create as jest.Mock).mock.lastCall[0];
+
+  expect(mockOptions).toStrictEqual({
     currency: "cad",
     source: "tok-nuka-cola",
     amount: 44 * 100,

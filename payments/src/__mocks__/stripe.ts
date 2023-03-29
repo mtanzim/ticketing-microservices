@@ -1,8 +1,7 @@
 export const stripe = {
   charges: {
-    create: jest.fn().mockImplementation((params) => {
-      console.log(params);
-      return Promise.resolve();
+    create: jest.fn().mockImplementation(async (params) => {
+      return "Ok";
     }),
   },
 };
