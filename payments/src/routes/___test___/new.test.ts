@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import request from "supertest";
 import { app } from "../../app";
 import { Order, OrderStatus } from "../../models/order";
+import { Payment } from "../../models/payment";
 import { stripe } from "../../stripe";
 
 jest.mock("../../stripe");
@@ -78,4 +79,32 @@ it("succeeds if everything else is in order", async () => {
     source: "tok-nuka-cola",
     amount: 44 * 100,
   });
+});
+
+it("creates a new payment document if successful", async () => {
+  // see mock
+  const stripeId = "ch_3MqPfkG2Yz03o3oL1iFSzvEy";
+  const { userId, cookieArr } = global.signin();
+  const orderId = new mongoose.Types.ObjectId().toHexString();
+  const order = Order.build({
+    id: orderId,
+    price: 44,
+    status: OrderStatus.Created,
+    userId,
+    version: 0,
+  });
+  await order.save();
+
+  await request(app)
+    .post("/api/payments")
+    .set("Cookie", cookieArr)
+    .send({ orderId, token: "tok-nuka-cola" })
+    .expect(201);
+
+  const newPayment = await Payment.findOne({
+    orderId,
+    stripeId,
+  });
+  expect(newPayment?.orderId).toBe(orderId);
+  expect(newPayment?.stripeId).toBe(stripeId);
 });

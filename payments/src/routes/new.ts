@@ -9,6 +9,7 @@ import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import mongoose from "mongoose";
 import { Order } from "../models/order";
+import { Payment } from "../models/payment";
 import { stripe } from "../stripe";
 
 const router = express.Router();
@@ -43,15 +44,25 @@ router.post(
     }
 
     // create charge
-    await stripe.charges.create({
+    const stripeRes = await stripe.charges.create({
       amount: order.price * 100,
       currency: "cad",
       source: token,
     });
 
+    if (!stripeRes?.id) {
+      throw new Error("stripe did not return a charge id");
+    }
+
+    const payment = Payment.build({
+      orderId,
+      stripeId: stripeRes.id,
+    });
+    await payment.save();
+
     // publish charge:created message
 
-    res.status(201).send(order);
+    res.status(201).send(payment);
   }
 );
 
