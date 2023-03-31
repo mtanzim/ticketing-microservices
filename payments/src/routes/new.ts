@@ -68,8 +68,7 @@ router.post(
     });
 
     // publish charge:created message
-
-    res.status(201).send(payment);
+    res.status(201).send({ id: payment.id });
   }
 );
 
