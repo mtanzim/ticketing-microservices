@@ -8,8 +8,10 @@ import {
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import mongoose from "mongoose";
+import { PaymentCreatedPublisher } from "../events/listeners/publishers/payment-created-publisher";
 import { Order } from "../models/order";
 import { Payment } from "../models/payment";
+import { natsWrapper } from "../nats-wrapper";
 import { stripe } from "../stripe";
 
 const router = express.Router();
@@ -59,6 +61,11 @@ router.post(
       stripeId: stripeRes.id,
     });
     await payment.save();
+    await new PaymentCreatedPublisher(natsWrapper.client).publish({
+      id: payment.id,
+      orderId: payment.orderId,
+      stripeId: payment.stripeId,
+    });
 
     // publish charge:created message
 
