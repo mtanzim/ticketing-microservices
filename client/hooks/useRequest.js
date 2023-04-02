@@ -12,7 +12,7 @@ export default function useRequest({ url, method, body, onSuccess }) {
     } catch (err) {
       const errors = err?.response?.data?.errors;
       setErrJSX(
-        <div className="alert alert-danger" role="alert">
+        <div className="alert alert-danger mt-2 mb-2" role="alert">
           <h2>Oops...</h2>
           <ul>
             {errors?.map((e, idx) => (

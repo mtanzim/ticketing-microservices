@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Tickets = ({ tickets }) => {
   return (
     <div>
@@ -7,6 +9,7 @@ const Tickets = ({ tickets }) => {
           <tr>
             <th>Title</th>
             <th>Price</th>
+            <th>Link</th>
           </tr>
         </thead>
         <tbody>
@@ -14,6 +17,15 @@ const Tickets = ({ tickets }) => {
             <tr key={t.id}>
               <td>{t.title}</td>
               <td>${t.price}</td>
+              <td>
+                <Link
+                  className="nav-link"
+                  href="/tickets/[ticketId]"
+                  as={`/tickets/${t.id}`}
+                >
+                  View
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>

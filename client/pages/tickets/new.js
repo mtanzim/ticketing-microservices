@@ -12,7 +12,7 @@ const NewTicket = ({ currentUser }) => {
       title,
       price,
     },
-    onSuccess: () => Router.push("/"),
+    onSuccess: () => Router.push("/tickets/"),
   });
 
   const onSubmit = async (e) => {
