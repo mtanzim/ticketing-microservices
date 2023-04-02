@@ -6,6 +6,8 @@ export default function Header({ currentUser }) {
     !currentUser && { label: "Sign in", href: "/auth/signin" },
     currentUser && { label: currentUser?.email, href: "/" },
     currentUser && { label: "Sign out", href: "/auth/signout" },
+    currentUser && { label: "Tickets", href: "/tickets" },
+    currentUser && { label: "Create a ticket", href: "/tickets/new" },
   ].filter(Boolean);
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
