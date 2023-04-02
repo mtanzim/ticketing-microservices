@@ -7,7 +7,7 @@ export default function AppComponent({ Component, pageProps, currentUser }) {
     <div>
       <Header currentUser={currentUser} />
       <div className="container">
-        <Component {...pageProps} />
+        <Component currentUser={currentUser} {...pageProps} />
       </div>
     </div>
   );
@@ -19,8 +19,12 @@ AppComponent.getInitialProps = async (appContext) => {
   const client = buildClient(appContext.ctx);
   const { data } = await client.get("/api/users/currentuser");
 
+  // note how we are passing in the client
+  // so each page does not need to use the buildClient helper
   const pageProps = await appContext?.Component?.getInitialProps?.(
-    appContext.ctx
+    appContext.ctx,
+    client,
+    data.currentUser
   );
   console.log(pageProps);
 
