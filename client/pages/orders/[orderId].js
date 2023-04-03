@@ -1,15 +1,37 @@
+import { useEffect, useState } from "react";
+
 const OrderShow = ({ order }) => {
+  const [timeRemaining, setTimeRemaining] = useState(0);
+  useEffect(() => {
+    const findTimeLeft = () => {
+      const expiresAt = new Date(order.expiresAt);
+      const now = new Date();
+      const delta = Math.round((expiresAt - now) / 1000);
+      setTimeRemaining(delta);
+    };
+    if (order?.expiresAt) {
+      findTimeLeft();
+      const timerId = setInterval(findTimeLeft, 1000);
+      return () => clearInterval(timerId);
+    }
+  }, [order]);
+
   if (!order) {
     return "Something went wrong";
   }
+
   return (
     <div>
       <h1>Order</h1>
-      <p>Status: {order.status}</p>
-      <p>Expires at: {order.expiresAt}</p>
-      <h2>Ticket</h2>
       <p>{order.ticket.title}</p>
       <p>${order.ticket.price}</p>
+      {timeRemaining > 0 ? (
+        <p>Time left to pay: {timeRemaining} seconds</p>
+      ) : (
+        "order expired!"
+      )}
+
+      {timeRemaining > 0 && <button className="btn btn-primary">Pay</button>}
     </div>
   );
 };
