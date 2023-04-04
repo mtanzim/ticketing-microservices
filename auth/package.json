@@ -7,7 +7,7 @@
     "start": "ts-node-dev --poll src/index.ts",
     "typecheck": "tsc --noEmit",
     "test": "jest --watchAll --no-cache",
-    "test:ci": "jest"
+    "test:ci": "jest --forceExit"
   },
   "jest": {
     "preset": "ts-jest",
