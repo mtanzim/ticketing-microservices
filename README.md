@@ -55,6 +55,12 @@ declare global {
 
 - [Importing global css](./client/pages/_app.js)
 - `getInitialProps` gets executed on the client side iff next app redirects from a page! Otherwise it is executed on the server, [see example](https://github.com/mtanzim/ticketing-microservices/blob/2920efa4fdcee790d6145bab36f76281fe37a58a/client/pages/index.js#L12)
+  - See helper function [here](https://github.com/mtanzim/ticketing-microservices/blob/cda21452e55b43af384f28f834205f5e5177080e/client/api/buildClient.js#L3) to abstract out this complexity
+  - See how we can access helper functions in pages through `getInitialProps` [here](https://github.com/mtanzim/ticketing-microservices/blob/cda21452e55b43af384f28f834205f5e5177080e/client/pages/_app.js#L24)
+- See clever usage of hooks to abstract out api calls [here](https://github.com/mtanzim/ticketing-microservices/blob/cda21452e55b43af384f28f834205f5e5177080e/client/hooks/useRequest.js#L4)
+- Note the convention for dynamic routes [here](https://github.com/mtanzim/ticketing-microservices/blob/cda21452e55b43af384f28f834205f5e5177080e/client/pages/tickets/[ticketId].js#L12) nad [here](https://github.com/mtanzim/ticketing-microservices/blob/cda21452e55b43af384f28f834205f5e5177080e/client/pages/tickets/index.js#L24)
+- Be careful about what code runs on the server vs the browser
+- TODO: research `useEffect` differences b/w SSR and SPAs 
 
 ### NPM Modules
 
