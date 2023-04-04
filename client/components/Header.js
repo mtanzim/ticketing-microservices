@@ -7,6 +7,7 @@ export default function Header({ currentUser }) {
     currentUser && { label: currentUser?.email, href: "/" },
     { label: "Tickets", href: "/tickets" },
     currentUser && { label: "Create a ticket", href: "/tickets/new" },
+    currentUser && { label: "My orders", href: "/orders" },
     currentUser && { label: "Sign out", href: "/auth/signout" },
   ].filter(Boolean);
   return (

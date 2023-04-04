@@ -8,8 +8,7 @@ const OrderShow = ({ order, currentUser }) => {
     url: "/api/payments",
     method: "post",
     body: { orderId: order.id },
-    onSuccess: (order) =>
-      Router.push("/orders/[orderId]", `/orders/${order.id}`),
+    onSuccess: () => Router.push("/orders"),
   });
   const [timeRemaining, setTimeRemaining] = useState(0);
   useEffect(() => {
