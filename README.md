@@ -117,3 +117,8 @@ declare global {
 - See the `models`, and `events` folders in the code
 
 ![Events and models](./assets/events-summary.png "events and models")
+
+### Workflows
+
+- Monorepo vs multi-repo
+- Most companies (even large ones) using microservices use monorepos? Confirm this statement
