@@ -22,7 +22,7 @@ const start = async () => {
     console.error(err);
   }
   app.listen(PORT, () => {
-    console.log(`started app on port ${PORT}`);
+    console.log(`auth started app on port ${PORT}!`);
   });
 };
 
