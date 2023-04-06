@@ -1,0 +1,17 @@
+# This is a basic workflow that is manually triggered
+
+name: tests
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+  pull_request:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: cd payments && npm i && npm run test:ci
+      
