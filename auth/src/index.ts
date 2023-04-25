@@ -22,7 +22,7 @@ const start = async () => {
     console.error(err);
   }
   app.listen(PORT, () => {
-    console.log(`authentication started app on port ${PORT}!`);
+    console.log(`authentication started on DIGITAL OCEAN port ${PORT}!`);
   });
 };
 
