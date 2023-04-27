@@ -122,3 +122,13 @@ declare global {
 
 - Monorepo vs multi-repo
 - Most companies (even large ones) using microservices use monorepos? Confirm this statement
+- [Github actions](./.github/workflows/) to manage testing and deploying changes to individual services (ie: auth, tickets etc.)
+  - Note the usage of docker hub to manage images of services
+  - Note the GH action helpers to access `doctl` and alike
+
+### Further Reading and relevant tools
+
+- [Hosting k8s cluster on digital ocean](https://try.digitalocean.com/kubernetes-in-minutes)
+- [doctl](https://docs.digitalocean.com/reference/doctl/)
+- [Accessing multiple clusters through kubectl](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters)
+- [kubectl cheatsheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
