@@ -4,9 +4,10 @@ export default function buildClient({ req }) {
   if (typeof window === "undefined") {
     // we are on the server!
     // requests should be made to ingress-controller in a separate namespace
+    // TODO: add a switch here for local dev
     return axios.create({
       baseURL:
-        "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local",
+        "http://www.ticket-app-dev-test.shop",
       headers: req?.headers,
     });
   } else {
